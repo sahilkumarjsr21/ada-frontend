@@ -1,6 +1,6 @@
 "use client"
 import { Provider as ConfigurationProvider } from '@/components/DiffView/context/configuration';
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback, useEffect, Suspense } from 'react';
 import { parseDiff } from 'react-diff-view';
 import DiffView from './Difference';
 import { set, uniqueId } from 'lodash';
@@ -74,9 +74,11 @@ function DiffComponent() {
     // }
 
     return (
+        
         <ConfigurationProvider>
+            <Suspense fallback = {<LoadingComponent/>} />
             {/* <button onClick={handleOnClick}>Test</button> */}
-            <LoadingComponent isLoading={isLoading}/>
+            {/* <LoadingComponent isLoading={isLoading}/> */}
             {!isLoading && <NoIssuesBanner isSuccess={isSuccess} url={url}/>}
             {file && <ConfigurationComponent /> && (
             <div id='diffView' className='m-[20px] rounded-md shadow-lg border-gray-700 border-2 overflow-y-auto'>
@@ -90,8 +92,9 @@ function DiffComponent() {
                 />
             </div>
             )
-        }
-
+        }   
+        <Suspense/>
+        
         </ConfigurationProvider>
     )
 }

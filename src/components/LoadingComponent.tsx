@@ -2,9 +2,8 @@
 interface Prop {
     isLoading: boolean
 }
-function LoadingComponent({isLoading}: Prop) {
+function LoadingComponent() {
     return (
-        isLoading &&
         <div className="mx-5 my-2 animate-pulse">
             <div className="rounded-md border-2 border-gray-800 p-1  overflow-hidden">
                 <div className="flex h-16 flex-col items-center justify-center space-y-2 rounded-t-md bg-gray-200">
